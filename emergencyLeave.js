@@ -105,3 +105,66 @@ function sendreport(name, email, reasonForTimeTaken, TimeTakenList, runningtotal
   } else {
     runningtotalTimetaken = runningtotalTimetakenArray[0] + "hrs " + runningtotalTimetakenArray[1] + "mins";
   }
+  var docid;
+  var doc;
+  var body;
+  var todaysdate = new Date();
+  var dd = todaysdate.getDate();
+  var mm = todaysdate.getMonth() + 1;
+  var yyyy = todaysdate.getFullYear();
+
+  if (reasonForTimeTaken == "Worked at alternate time") {
+    docid = DriveApp.getFileById("1zQCTkBp37cc3WodE9Zb9EsZ7v9CdHyAI6xM8oENHSmI").makeCopy("Leavers_Letter_" + Utilities.formatDate(new Date(), "GMT+1", "dd-MMM-yyyy") + "_" + name, dstFolderId).getId()
+    doc = DocumentApp.openById(docid);
+    body = doc.getActiveSection();
+    var timeofferedlistArray = TimeOfferedList.split("@");
+    var dateOffered = "\r";
+    var timeOffered = "\r";
+    var hrsOffered = "\r";
+
+    for (i = 0; i < timeofferedlistArray.length; i++) {
+      dateOffered += Trim(timeofferedlistArray[i].split("|")[0]) + '\r';
+      timeOffered += Trim(timeofferedlistArray[i].split("|")[1]) + '\r';
+      hrsOffered += Trim(timeofferedlistArray[i].split("|")[2]) + '\r';
+    }
+    var runningtotalTimeofferedArray = runningtotalTimeoffered.split(":");
+    if (runningtotalTimeofferedArray[1] == "00") {
+      runningtotalTimeoffered = runningtotalTimeofferedArray[0] + "hrs ";
+    } else {
+      runningtotalTimeoffered = runningtotalTimeofferedArray[0] + "hrs " + runningtotalTimeofferedArray[1] + "mins";
+    }
+    body.replaceText("%todaysdate%", dd + "/" + mm + "/" + yyyy);
+    body.replaceText("%fullname%", name);
+    body.replaceText("%email%", email);
+    body.replaceText("%manager%", manager);
+    body.replaceText("%datetaken%", dateTaken);
+    body.replaceText("%timetaken%", timeTaken);
+    body.replaceText("%hrstaken%", hrsTaken);
+    body.replaceText("%totalhrstaken%", runningtotalTimetaken);
+    body.replaceText("%dateoffered%", dateOffered);
+    body.replaceText("%timeoffered%", timeOffered);
+    body.replaceText("%hrsoffered%", hrsOffered);
+    body.replaceText("%totalhrsoffered%", runningtotalTimeoffered);
+  } else {
+    docid = DriveApp.getFileById("1Twt4L_huG84myt8uUiy9Ey5OzyxRC3uDzwt1VDXCZzc").makeCopy("Leavers_Letter_" + Utilities.formatDate(new Date(), "GMT+1", "dd-MMM-yyyy") + "_" + name, dstFolderId).getId()
+    doc = DocumentApp.openById(docid);
+    body = doc.getActiveSection();
+    body.replaceText("%todaysdate%", dd + "/" + mm + "/" + yyyy);
+    body.replaceText("%fullname%", name);
+    body.replaceText("%email%", email);
+    body.replaceText("%reason%", reasonForTimeTaken);
+    body.replaceText("%manager%", manager);
+    body.replaceText("%datetaken%", dateTaken);
+    body.replaceText("%timetaken%", timeTaken);
+    body.replaceText("%hrstaken%", hrsTaken);
+    body.replaceText("%totalhrstaken%", runningtotalTimetaken);
+  }
+  doc.saveAndClose();
+  GmailApp.sendEmail('sboocock@calw.org.uk', 'Time taken off for Medical or Family Emergency Reasons', 'Please see the attached report.', {
+    cc: manageremail,
+    bcc: 'pirlam@calw.org.uk',
+    attachments: [doc.getAs(MimeType.PDF)],
+    name: 'Time taken off for Medical or Family Emergency Reasons'
+  });
+  //GmailApp.sendEmail('pirlam@calw.org.uk', 'Time taken off for Medical or Family Emergency Reasons', 'Please see the attached report.', {bcc:'pirlam@calw.org.uk', attachments: [doc.getAs(MimeType.PDF)],name: 'Time taken off for Medical or Family Emergency Reasons' });
+}
