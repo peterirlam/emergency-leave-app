@@ -225,3 +225,95 @@
     }
   </style>
 </head>
+
+<body>
+  <div class="center_form">
+    <div class="main-form">
+      <div style="display:flex;width:100%;margin-top:0px;margin-bottom:-50px;">
+        <image src="https://drive.google.com/uc?export=view&id=1kMf2uvo5rmTi2YkjVWTP90d9STbF2Mwx" style="vertical-align:middle;display:inline;margin-left:7%;" width="320px" height="116px" />
+        <h2 style="margin-left-55px;font-weight:bold">Record of time taken for Medical, Dental or Family Emergencies</h2>
+      </div>
+      <form id="main" action='https://script.google.com/a/calancs.org.uk/macros/s/AKfycbwYbZ4dCijoUUj3EVGOMf08VFyEU4fnfwa8-yWh0xHhbfmCK0A/exec' method='post'>
+        <div class="info">
+          <div style="display:flex;">
+            <label style="margin-top:8px;text-align:left;width:50px;">Name:</label>
+            <input onfocus="this.removeAttribute('placeholder')" onblur="this.setAttribute('placeholder','* First and Last Names')" id="name_001" name="name_001" style="width:200px;" type="search" placeholder="* First and Last Names" required
+              pattern="^[a-zA-Z\s]*$" oninvalid="this.setCustomValidity('Name required')" oninput="this.setCustomValidity('');document.getElementById('btnsubmit').setAttribute('novalidate', true);">
+            <label style="margin-top:8px;text-align:left;width:40px;margin-left:30px;">Email:</label>
+            <input id="email_001" readonly name="email_001" style="width:200px;margin-left:5px;border:none;background:none;font-family: Roboto, Arial, sans-serif;font-size: 14px;color: #324da8;" type="search" value="<?=requestoremail?>">
+            <label style="margin-top:8px;text-align:left;width:40px;margin-left:10px;">Manager:</label>
+            <input id="managername" readonly name="managername" style="margin-left:15px;width:150px;border:none;background:none;font-family: Roboto, Arial, sans-serif;font-size: 14px;color: #324da8;" type="search" value="<?=manager?>">
+            <label style="margin-top:10px;text-align:left;width:160px;margin-left:25px;">Confirmed with Manager?</label>
+            <div style="display:inline;margin-top:10px;">
+              <input id="checkbox_001" name="checkbox_001" style="width:40px;" type="checkbox" oninvalid="this.setCustomValidity('Please confirm you have confirmed this with your Manager')" oninput="this.setCustomValidity('');" required>
+            </div>
+          </div>
+          <!-- *********************************************************** Time Taken ******************************************************************** -->
+          <div style="display:inline;">
+            <p style="font-size:16px;color:#324da8;"><b>Step 1: Please record the time you need for medical, dental or family emergencies below:</b></p>
+          </div>
+          <div id="timeTakenSection" style="border-width:2px;border-style:groove;padding:15px;">
+            <div style="display:flex; margin-top:15px;">
+              <label style="margin-top:8px;text-align:left;width:54px;">Date:</label>
+              <input id="dateTimeTaken" onfocus="clearStatus('hoursTakenAdded')" name="startingdate" style="width:150px;" type="date" oninvalid="this.setCustomValidity('Date required')" oninput="this.setCustomValidity('')" required>
+              <label style="margin-top:5px;text-align:left;width:40px;margin-left:15px;margin-right:5px;">Start:</label>
+              <select id="starthrs" name="starthrs" onclick="clearStatus('hoursTakenAdded');setHrsTaken();">
+                <option value="0">00</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="13">13</option>
+                <option value="14">14</option>
+                <option value="15">15</option>
+                <option value="16">16</option>
+                <option value="17">17</option>
+                <option value="18">18</option>
+              </select>
+              <label style="text-align:center;width:10px;font-weight:bold;font-size:18px;verical-align:middle;margin-top:3px;">:</label>
+              <select id="startmins" name="startmins" onclick="clearStatus('hoursTakenAdded');setHrsTaken();">
+                <option value="0">00</option>
+                <option value="15">15</option>
+                <option value="30">30</option>
+                <option value="45">45</option>
+              </select>
+              <label style="margin-top:5px;text-align:left;width:30px;margin-left:25px;margin-right:5px;">End:</label>
+              <select id="endhrs" name="endhrs" onclick="clearStatus('hoursTakenAdded');setHrsTaken();">
+                <option value="0">00</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="13">13</option>
+                <option value="14">14</option>
+                <option value="15">15</option>
+                <option value="16">16</option>
+                <option value="17">17</option>
+                <option value="18">18</option>
+              </select>
+              <label style="text-align:center;width:10px;font-weight:bold;font-size:18px;verical-align:middle;margin-top:3px;">:</label>
+              <select id="endmins" name="endmins" onclick="clearStatus('hoursTakenAdded');setHrsTaken();">
+                <option value="0">00</option>
+                <option value="15">15</option>
+                <option value="30">30</option>
+                <option value="45">45</option>
+              </select>
+              <!--<a href="#" style="margin-left:10px;margin-top:8px;" onclick="checkTimeTaken();return false;">Add</a>-->
+              <button style="margin-left:10px;margin-top:2px;height:28px;width:80px;font-size:14px;line-height: 10px;" onclick="checkTimeTaken();return false;" formNoValidate>Add</button>
+              <label style="text-align:center;margin-top:8px;text-align:left;width:90px;margin-left:75px;margin-right:5px;">Time taken:</label>
+              <input id="totalhrstaken" name="totalhrstaken" style="width:40px;background:none;height:15px;" readonly>
+            </div>
+            <div style="display:inline; margin-top:30px;">
+              <label style="margin-top:8px;text-align:left;width:40px;margin-right:3px;">Details:</label>
+              <select id="takenhours" name="takenhours" style="width:450px;height:40px;">
+              </select>
+              <a id="lnkdeleteTimeTaken" href="#" style="margin-left:10px;margin-top:8px;visibility:hidden;" onclick="clearStatus('hoursTakenAdded');deleteTimeTaken();return false;">Delete</a>
+              <label style="margin-top:8px;text-align:right;width:120px;margin-right:12px;margin-left:125px;">Total time taken:</label>
+              <input id="runningtotalTimetaken" name="runningtotalTimetaken" style="text-align:center;width:40px;background:none;color:red;font-weight:bold;height:15px;display:inline;" readonly>
+            </div>
+            <br>
+            <label id="hoursTakenAdded" style="margin-top:5px;text-align:left;width:200px;margin-left:50px;margin-right:10px;color:blue;"></label>
+          </div>
+        </div> <!-- End Time Taken -->
