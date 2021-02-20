@@ -317,3 +317,91 @@
             <label id="hoursTakenAdded" style="margin-top:5px;text-align:left;width:200px;margin-left:50px;margin-right:10px;color:blue;"></label>
           </div>
         </div> <!-- End Time Taken -->
+        <div style="height:20px;"> </div>
+        <div id="timereason" style="display:none;">
+          <div style="display:inline;">
+            <p style="font-size:16px;color:#324da8;"><b>Step 2: Do you prefer the above hours to be recorded as unpaid/annual leave or worked at an alternative time?</b></p>
+          </div>
+
+          <div style="display:flex;border-width:2px;border-style:groove;padding:15px;">
+            <label for="unpaidleave">Unpaid leave</label>
+            <input type="radio" id="unpaidleave" onclick="timeoffreason()" name="hoursoffreason" value="unpaid" oninvalid="this.setCustomValidity('Choose an option')" oninput="this.setCustomValidity('')" style="width:20px;" required>
+            <label for="annualleave">Annual leave</label>
+            <input type="radio" onclick="timeoffreason()" id="annualleave" name="hoursoffreason" value="annual" style="width:20px;">
+            <label for="makingup">Worked at alternate time</label>
+            <input type="radio" onclick="timeoffreason()" id="makingup" name="hoursoffreason" value="makeup" style="width:20px;">
+            <br>
+            <label id="hoursoffreasonstatus" style="margin-top:0px;text-align:left;width:350px;margin-left:20px;color:blue;"></label>
+          </div>
+        </div>
+        <div style="height:20px;"> </div>
+        <!-- *********************************************************** Time Offered ******************************************************************** -->
+        <div id="timeOfferedSection" style="display:none;">
+          <div style="display:inline;">
+            <p style="font-size:16px;color:#324da8;"><b>Step 3: Please enter time you would like to work to balance time recorded above (subject to approval):</b></p>
+          </div>
+          <div style="border-width:2px;border-style:groove;padding:15px;">
+            <div style="display:flex; margin-top:15px;">
+              <label style="margin-top:8px;text-align:left;width:54px;">Date:</label>
+              <input id="dateTimeOffered" onfocus="clearStatus('hoursOfferedAdded')" name="startingdate" style="width:150px;" type="date" oninvalid="this.setCustomValidity('Date required')" oninput="this.setCustomValidity('')" required>
+              <label style="margin-top:5px;text-align:left;width:40px;margin-left:15px;margin-right:5px;">Start:</label>
+              <select id="starthrsOffered" name="starthrsOffered" onclick="clearStatus('hoursOfferedAdded');setHrsOffered();">
+                <option value="0">00</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="13">13</option>
+                <option value="14">14</option>
+                <option value="15">15</option>
+                <option value="16">16</option>
+                <option value="17">17</option>
+                <option value="18">18</option>
+              </select>
+              <label style="text-align:center;width:10px;font-weight:bold;font-size:18px;vertical-align:middle;margin-top:3px;">:</label>
+              <select id="startminsOffered" name="startminsOffered" onclick="clearStatus('hoursOfferedAdded');setHrsOffered();">
+                <option value="0">00</option>
+                <option value="15">15</option>
+                <option value="30">30</option>
+                <option value="45">45</option>
+              </select>
+              <label style="margin-top:5px;text-align:left;width:30px;margin-left:25px;margin-right:5px;">End:</label>
+              <select id="endhrsOffered" name="endhrsOffered" onclick="clearStatus('hoursOfferedAdded');setHrsOffered();">
+                <option value="0">00</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="13">13</option>
+                <option value="14">14</option>
+                <option value="15">15</option>
+                <option value="16">16</option>
+                <option value="17">17</option>
+                <option value="18">18</option>
+              </select>
+              <label style="text-align:center;width:10px;font-weight:bold;font-size:18px;vertical-align:middle;margin-top:3px;">:</label>
+              <select id="endminsOffered" name="endminsOffered" onclick="clearStatus('hoursOfferedAdded');setHrsOffered();">
+                <option value="0">00</option>
+                <option value="15">15</option>
+                <option value="30">30</option>
+                <option value="45">45</option>
+              </select>
+              <button style="margin-left:10px;margin-top:2px;height:28px;width:80px;font-size:14px;line-height: 10px;" onclick="checkTimeOffered();return false;" formNoValidate>Add</button>
+              <label style="text-align:center;margin-top:8px;text-align:left;width:90px;margin-left:75px;margin-right:5px;">Time offered:</label>
+              <input id="totalhrsoffered" name="totalhrsoffered" style="width:40px;background:none;height:15px;" readonly>
+            </div>
+            <div style="display:inline; margin-top:30px;">
+              <label style="margin-top:8px;text-align:left;width:40px;margin-right:3px;">Details:</label>
+              <select id="offeredhours" name="offeredhours" style="width:450px;height:40px;">
+              </select>
+              <a id="lnkdeleteTimeOffered" href="#" style="margin-left:10px;margin-top:8px;visibility:hidden;" onclick="clearStatus('hoursOfferedAdded');deleteTimeOffered();return false;">Delete</a>
+              <label style="margin-top:8px;text-align:right;width:120px;margin-right:12px;margin-left:114px;">Total time offered:</label>
+              <input id="runningtotalTimeoffered" name="runningtotalTimeoffered" style="text-align:center;width:40px;color:green;background:none;font-weight:bold;height:15px;display:inline;" readonly>
+            </div>
+            <br>
+            <label id="hoursOfferedAdded" style="margin-top:5px;text-align:left;width:200px;margin-left:50px;margin-right:10px;color:blue;"></label>
+          </div>
+        </div>
+        <!-- End Time Offered -->
