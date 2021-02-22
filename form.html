@@ -427,3 +427,88 @@
     </div>
   </div>
 </body>
+
+<script>
+  function sortList(selectlist) {
+    var sortByDate = function(a, b) {
+      return new Date(a.value) - new Date(b.value);
+    }
+    var list = document.getElementById(selectlist);
+    var options = list.getElementsByTagName("option");
+    // NodeList in previous step is an
+    // object and needs to be converted to an array.
+    var optionsArray = Array.prototype.slice.call(options);
+    // Use the sort method (in-place sorting)
+    optionsArray.sort(sortByDate);
+    // re-insert the sorted nodes
+    for (var i = 0; i < optionsArray.length; i++) {
+      list.appendChild(optionsArray[i]);
+    }
+  }
+
+  function formsubmitted() {
+    var inpName = document.getElementById("name_001");
+    var inpEmail = document.getElementById("email_001");
+    var inpCheckedWithManager = document.getElementById("checkbox_001");
+    if (inpName.checkValidity() && inpCheckedWithManager.checkValidity()) {
+      if (document.getElementById("unpaidleave").checked) {
+        document.getElementById("hdnTimeTakenReason").value = "Unpaid Leave";
+        var hrstakenSelect = document.getElementById("takenhours");
+        var hrstakenString = " ";
+        for (i = 0; i < hrstakenSelect.length; i++) {
+          if (i < hrstakenSelect.length - 1) {
+            hrstakenString += hrstakenSelect.options[i].text.replace("From: ", "").replace("Total: ", "") + "@";
+          } else {
+            hrstakenString += hrstakenSelect.options[i].text.replace("From: ", "").replace("Total: ", "");
+          }
+        }
+        document.getElementById("hdnTimeTakenList").value = hrstakenString;
+        document.getElementById('btnsubmit').formNoValidate = true;
+        document.getElementById("btnsubmit").disabled = true;
+        document.getElementById("progress").style.display = 'inline';
+        document.getElementById("main").submit();
+      } else if (document.getElementById("annualleave").checked) {
+        document.getElementById("hdnTimeTakenReason").value = "Annual Leave"
+        var hrstakenSelect = document.getElementById("takenhours");
+        var hrstakenString = " ";
+        for (i = 0; i < hrstakenSelect.length; i++) {
+          if (i < hrstakenSelect.length - 1) {
+            hrstakenString += hrstakenSelect.options[i].text.replace("From: ", "").replace("Total: ", "") + "@";
+          } else {
+            hrstakenString += hrstakenSelect.options[i].text.replace("From: ", "").replace("Total: ", "");
+          }
+        }
+        document.getElementById("hdnTimeTakenList").value = hrstakenString;
+        document.getElementById('btnsubmit').formNoValidate = true;
+        document.getElementById("btnsubmit").disabled = true;
+        document.getElementById("progress").style.display = 'inline';
+        document.getElementById("main").submit();
+      } else if (document.getElementById("makingup").checked) {
+        document.getElementById("hdnTimeTakenReason").value = "Worked at alternate time"
+        var hrstakenSelect = document.getElementById("takenhours");
+        var hrstakenString = " ";
+        for (i = 0; i < hrstakenSelect.length; i++) {
+          if (i < hrstakenSelect.length - 1) {
+            hrstakenString += hrstakenSelect.options[i].text.replace("From: ", "").replace("Total: ", "") + "@";
+          } else {
+            hrstakenString += hrstakenSelect.options[i].text.replace("From: ", "").replace("Total: ", "");
+          }
+        }
+        document.getElementById("hdnTimeTakenList").value = hrstakenString;
+        var hrsofferedSelect = document.getElementById("offeredhours");
+        var hrsofferedString = " ";
+        for (i = 0; i < hrsofferedSelect.length; i++) {
+          if (i < hrsofferedSelect.length - 1) {
+            hrsofferedString += hrsofferedSelect.options[i].text.replace("From: ", "").replace("Total: ", "") + "@";
+          } else {
+            hrsofferedString += hrsofferedSelect.options[i].text.replace("From: ", "").replace("Total: ", "");
+          }
+        }
+        document.getElementById("hdnTimeOfferedList").value = hrsofferedString;
+        document.getElementById('btnsubmit').formNoValidate = true;
+        document.getElementById("btnsubmit").disabled = true;
+        document.getElementById("progress").style.display = 'inline';
+        document.getElementById("main").submit();
+      }
+    }
+  }
