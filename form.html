@@ -405,3 +405,25 @@
           </div>
         </div>
         <!-- End Time Offered -->
+        <div style="clear:both;"></div>
+        <div style="width:100%;display:inline-block;">
+          <button id="btnsubmit" style="float:left;background:#ccc;" disabled onclick="formsubmitted();">Submit</button>
+          <br>
+          <br>
+          <label id="hoursNotEqualWarning" style="font-weight:bold;font-size:16px;display:none;margin-top:40px;text-align:left;width:200px;margin-left:50px;margin-right:10px;color:red;">Hours offered and taken need to be equal before
+            submitting.</label>
+          <div id="progress" style="float:left;display:none;margin-left:60px;margin-top:15px;">
+            <div style="float:left;display:inline;color:red;margin-right:40px;margin-top:10px;">Submitting please wait ...</div>
+            <div class="loader"></div>
+          </div>
+        </div>
+        <input type="hidden" id="hdntotalTimeTaken" name="hdntotalTimeTaken">
+        <input type="hidden" id="hdntotalTimeOffered" name="hdntotalTimeOffered">
+        <input type="hidden" id="hdnTimeTakenReason" name="hdnTimeTakenReason">
+        <input type="hidden" id="hdnTimeTakenList" name="hdnTimeTakenList">
+        <input type="hidden" id="hdnTimeOfferedList" name="hdnTimeOfferedList">
+        <input type="hidden" id="hdnManager" name="hdnManager">
+      </form>
+    </div>
+  </div>
+</body>
