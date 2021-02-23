@@ -512,3 +512,26 @@
       }
     }
   }
+
+  function formatDate(thedate) {
+    let current_datetime = new Date(thedate)
+    var day;
+    var month;
+    if (current_datetime.getDate().toString().length < 2) {
+      day = "0" + current_datetime.getDate();
+    } else {
+      day = current_datetime.getDate();
+    }
+    var currentmonth = current_datetime.getMonth() + 1;
+    if (currentmonth.toString().length < 2) {
+      month = "0" + currentmonth
+    } else {
+      month = currentmonth
+    }
+    let formatted_date = day + "/" + month + "/" + current_datetime.getFullYear();
+    if (!isNaN(day)) {
+      return formatted_date;
+    } else {
+      return false;
+    }
+  }
