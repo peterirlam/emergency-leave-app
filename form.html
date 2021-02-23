@@ -558,3 +558,27 @@
     }
     return false;
   }
+
+  function checkTimeOffered() {
+    var starthrs = document.getElementById("starthrsOffered").options[document.getElementById("starthrsOffered").selectedIndex].value;
+    var endhrs = document.getElementById("endhrsOffered").options[document.getElementById("endhrsOffered").selectedIndex].value;
+    var startmins = document.getElementById("startminsOffered").options[document.getElementById("startminsOffered").selectedIndex].value;
+    var endmins = document.getElementById("endminsOffered").options[document.getElementById("endminsOffered").selectedIndex].value;
+
+    if (!document.getElementById("dateTimeOffered").value) {
+      document.getElementById("dateTimeOffered").setCustomValidity("Date required");
+      document.getElementById("dateTimeOffered").reportValidity();
+    } else if (starthrs == "0") {
+      document.getElementById("starthrsOffered").setCustomValidity("Please select valid start and end times");
+      document.getElementById("starthrsOffered").reportValidity();
+    } else if (endhrs == "0") {
+      document.getElementById("endhrsOffered").setCustomValidity("Please select valid start and end times");
+      document.getElementById("endhrsOffered").reportValidity();
+    } else if (parseInt(starthrs) > parseInt(endhrs)) {
+      document.getElementById("starthrsOffered").setCustomValidity("Start time cannot be later than end time.");
+      document.getElementById("starthrsOffered").reportValidity();
+    } else {
+      addTimeOffered();
+    }
+    return false;
+  }
