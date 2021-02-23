@@ -535,3 +535,26 @@
       return false;
     }
   }
+
+  function checkTimeTaken() {
+    var starthrs = document.getElementById("starthrs").options[document.getElementById("starthrs").selectedIndex].value;
+    var endhrs = document.getElementById("endhrs").options[document.getElementById("endhrs").selectedIndex].value;
+    var startmins = document.getElementById("startmins").options[document.getElementById("startmins").selectedIndex].value;
+    var endmins = document.getElementById("endmins").options[document.getElementById("endmins").selectedIndex].value;
+    if (!document.getElementById("dateTimeTaken").value) {
+      document.getElementById("dateTimeTaken").setCustomValidity("Date required");
+      document.getElementById("dateTimeTaken").reportValidity();
+    } else if (starthrs == "0") {
+      document.getElementById("starthrs").setCustomValidity("Please select valid start and end times");
+      document.getElementById("starthrs").reportValidity();
+    } else if (endhrs == "0") {
+      document.getElementById("endhrs").setCustomValidity("Please select valid start and end times");
+      document.getElementById("endhrs").reportValidity();
+    } else if (parseInt(starthrs) > parseInt(endhrs)) {
+      document.getElementById("starthrs").setCustomValidity("Start time cannot be later than end time.");
+      document.getElementById("starthrs").reportValidity();
+    } else {
+      addTimeTaken();
+    }
+    return false;
+  }
