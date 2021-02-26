@@ -619,3 +619,33 @@
       deleteTimeAllOffered();
     }
   }
+
+  function deleteTimeOffered() {
+    var sel = document.getElementById("offeredhours");
+    var opt = sel.options[sel.selectedIndex];
+    var hrsOffered = opt.text.split("Total:")[1].trim().split(" ")[0];
+    var minsOffered = opt.text.split("Total:")[1].trim().split(" ")[2];
+    if (typeof minsOffered == "undefined") {
+      minsOffered = "0";
+    } else {
+      minsOffered = opt.text.split("Total:")[1].trim().split(" ")[2];
+    }
+    var totalminsoffered = parseInt(minsOffered) + (parseInt(hrsOffered) * 60)
+    var runningtotalhrsoffered = document.getElementById("runningtotalTimeoffered").value.split(":")[0];
+    var runningtotalminsoffered = document.getElementById("runningtotalTimeoffered").value.split(":")[1];
+    if (runningtotalminsoffered == "00") {
+      runningtotalminsoffered = "0";
+    }
+    var totalrunningtotalminsoffered = (parseInt(runningtotalminsoffered) + (parseInt(runningtotalhrsoffered) * 60));
+    runningtotalhrsoffered = Math.trunc(parseInt(parseInt(totalrunningtotalminsoffered) - parseInt(totalminsoffered)) / 60);
+    runningtotalminsoffered = parseInt(parseInt(totalrunningtotalminsoffered) - parseInt(totalminsoffered)) % 60;
+    document.getElementById("runningtotalTimeoffered").value = runningtotalhrsoffered + ":" + runningtotalminsoffered;
+    document.getElementById("hdntotalTimeOffered").value = runningtotalhrsoffered + ":" + runningtotalminsoffered;
+    sel.remove(sel.selectedIndex);
+    if (sel.options.length == 0) {
+      document.getElementById("lnkdeleteTimeOffered").style.visibility = 'hidden';
+      document.getElementById("runningtotalTimeoffered").value = "";
+      document.getElementById("btnsubmit").disabled = true;
+      document.getElementById("btnsubmit").style.backgroundColor = "#ccc";
+    }
+  }
