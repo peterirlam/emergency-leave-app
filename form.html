@@ -582,3 +582,40 @@
     }
     return false;
   }
+
+  function deleteTimeTaken() {
+    var sel = document.getElementById("takenhours");
+    var opt = sel.options[sel.selectedIndex];
+    var hrsTaken = opt.text.split("Total:")[1].trim().split(" ")[0];
+    var minsTaken = opt.text.split("Total:")[1].trim().split(" ")[2];
+    if (typeof minsTaken == "undefined") {
+      minsTaken = "0";
+    } else {
+      minsTaken = opt.text.split("Total:")[1].trim().split(" ")[2];
+    }
+    var totalminstaken = parseInt(minsTaken) + (parseInt(hrsTaken) * 60)
+    var runningtotalhrstaken = document.getElementById("runningtotalTimetaken").value.split(":")[0];
+    var runningtotalminstaken = document.getElementById("runningtotalTimetaken").value.split(":")[1];
+    if (runningtotalminstaken == "00") {
+      runningtotalminstaken = "0";
+    }
+    var totalrunningtotalminstaken = (parseInt(runningtotalminstaken) + (parseInt(runningtotalhrstaken) * 60));
+    runningtotalhrstaken = Math.trunc(parseInt(parseInt(totalrunningtotalminstaken) - parseInt(totalminstaken)) / 60);
+    runningtotalminstaken = parseInt(parseInt(totalrunningtotalminstaken) - parseInt(totalminstaken)) % 60;
+    document.getElementById("runningtotalTimetaken").value = runningtotalhrstaken + ":" + runningtotalminstaken;
+    document.getElementById("hdntotalTimeTaken").value = runningtotalhrstaken + ":" + runningtotalminstaken;
+    sel.remove(sel.selectedIndex);
+    if (sel.options.length == 0) {
+      document.getElementById("lnkdeleteTimeTaken").style.visibility = 'hidden';
+      document.getElementById("runningtotalTimetaken").value = "";
+      document.getElementById("timereason").style.display = 'none';
+      document.getElementById("hoursoffreasonstatus").innerHTML = "";
+      document.getElementById("unpaidleave").checked = false;
+      document.getElementById("annualleave").checked = false;
+      document.getElementById("makingup").checked = false;
+      document.getElementById("timeOfferedSection").style.display = "none";
+      document.getElementById("btnsubmit").disabled = true;
+      document.getElementById("btnsubmit").style.backgroundColor = "#ccc";
+      deleteTimeAllOffered();
+    }
+  }
