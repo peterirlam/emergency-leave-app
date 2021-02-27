@@ -649,3 +649,16 @@
       document.getElementById("btnsubmit").style.backgroundColor = "#ccc";
     }
   }
+
+  function deleteTimeAllOffered() {
+    var sel = document.getElementById("offeredhours");
+    while (sel.length > 0) {
+      sel.remove(0);
+    }
+    document.getElementById("lnkdeleteTimeOffered").style.visibility = 'hidden';
+    document.getElementById("runningtotalTimeoffered").value = "";
+  }
+
+  function setTotalHrsTaken() {
+    document.getElementById("hdntotalTimeTaken").value = totalTimeTaken;
+  }
