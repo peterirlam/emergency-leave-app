@@ -662,3 +662,26 @@
   function setTotalHrsTaken() {
     document.getElementById("hdntotalTimeTaken").value = totalTimeTaken;
   }
+
+  function setHrsTaken() {
+    var endhrs = document.getElementById("endhrs").options[document.getElementById("endhrs").selectedIndex].value;
+    var starthrs = document.getElementById("starthrs").options[document.getElementById("starthrs").selectedIndex].value;
+    var endmins = document.getElementById("endmins").options[document.getElementById("endmins").selectedIndex].value;
+    var startmins = document.getElementById("startmins").options[document.getElementById("startmins").selectedIndex].value;
+    var totalMins = parseInt(endmins) - parseInt(startmins);
+    var totalHrs = parseInt(endhrs) - parseInt(starthrs);
+    if (totalHrs > 0 || (totalHrs == 0) && (totalMins > 0)) {
+      var totalMins;
+      if (endmins == startmins) {
+        document.getElementById("totalhrstaken").value = totalHrs + ":0";
+      } else if (endmins == "0") {
+        document.getElementById("totalhrstaken").value = (totalHrs - 1) + ":" + (60 - startmins);
+      } else {
+        document.getElementById("totalhrstaken").value = totalHrs + ":" + (endmins - startmins);
+      }
+      return true;
+    } else {
+      document.getElementById("totalhrstaken").value = "";
+      return false;
+    }
+  }
