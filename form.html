@@ -708,3 +708,80 @@
       return false;
     }
   }
+
+  function addTimeTaken() {
+    var hrstakenSelect = document.getElementById("takenhours");
+    var startmins = document.getElementById("startmins").value;
+    var endmins = document.getElementById("endmins").value;
+    if (document.getElementById("startmins").value == "0") {
+      startmins = "00"
+    }
+    if (document.getElementById("endmins").value == "0") {
+      endmins = "00"
+    }
+    var starttime = document.getElementById("starthrs").value + ":" + startmins;
+    var endtime = document.getElementById("endhrs").value + ":" + endmins;
+    var totalTimeTaken;
+    var totalmins;
+    var totalTimeArray = document.getElementById("totalhrstaken").value.split(":");
+    totalhours = totalTimeArray[0];
+    if (totalTimeArray[1] == "0") {
+      totalTimeTaken = totalTimeArray[0] + " hrs";
+    } else {
+      totalTimeTaken = totalTimeArray[0] + " hrs  " + totalTimeArray[1] + " mins";
+    }
+    if (setHrsTaken()) {
+      if (document.getElementById("hdntotalTimeTaken").value.length > 0) {
+        var currentTotalTimeTaken = document.getElementById("hdntotalTimeTaken").value.split(":");
+        var totalHours = parseInt(totalTimeArray[0]) + parseInt(currentTotalTimeTaken[0]);
+        var totalMins = parseInt(totalTimeArray[1]) + parseInt(currentTotalTimeTaken[1]);
+        if (totalMins >= 60) {
+          totalHours = totalHours + parseInt(totalMins / 60);
+          totalMins = totalMins % 60;
+        }
+        document.getElementById("hdntotalTimeTaken").value = totalHours + ":" + totalMins;
+        document.getElementById("runningtotalTimetaken").value = totalHours + ":" + totalMins;
+      } else {
+        document.getElementById("hdntotalTimeTaken").value = document.getElementById("totalhrstaken").value;
+        document.getElementById("runningtotalTimetaken").value = document.getElementById("totalhrstaken").value;
+      }
+      var dateObjFormatted = document.getElementById("dateTimeTaken").value;
+      var option;
+      option = formatDate("Time taken: " + document.getElementById("dateTimeTaken").value) + " \u00A0 |  \u00A0  From: " + starttime + " to: " + endtime + " \u00A0  |  \u00A0  Total: " + totalTimeTaken;
+      hrstakenSelect.options.add(new Option(option, dateObjFormatted), hrstakenSelect.options[0]);
+      hrstakenSelect.selectedIndex = 0;
+      document.getElementById("hoursTakenAdded").innerHTML = "Hours added to list - add further hours if required";
+      document.getElementById("dateTimeTaken").value = false;
+      document.getElementById("totalhrstaken").value = "";
+      document.getElementById("starthrs").selectedIndex = "0";
+      document.getElementById("startmins").selectedIndex = "0";
+      document.getElementById("endhrs").selectedIndex = "0";
+      document.getElementById("endmins").selectedIndex = "0";
+      document.getElementById("lnkdeleteTimeTaken").style.visibility = 'visible';
+      document.getElementById("timereason").style.display = 'inline';
+      var totaltaken = document.getElementById("runningtotalTimetaken").value;
+      var totaloffered = document.getElementById("runningtotalTimeoffered").value;
+      if (document.getElementById("makingup").checked) {
+        if (totaltaken != totaloffered) {
+          document.getElementById("btnsubmit").disabled = true;
+          document.getElementById("btnsubmit").style.backgroundColor = "#ccc";
+          document.getElementById("hoursNotEqualWarning").style.display = "inline";
+        } else {
+          document.getElementById("btnsubmit").disabled = false;
+          document.getElementById("btnsubmit").style.backgroundColor = "#1c87c9";
+          document.getElementById("hoursNotEqualWarning").style.display = "none";
+        }
+      }
+      sortList('takenhours');
+    } else {
+      endmins = document.getElementById("endmins").options[document.getElementById("endmins").selectedIndex].value;
+      startmins = document.getElementById("startmins").options[document.getElementById("startmins").selectedIndex].value;
+      var totalMins = parseInt(endmins) - parseInt(startmins);
+      if (totalMins < 0) {
+        document.getElementById("starthrs").setCustomValidity("Start time time cannot be greater than end time.");
+      } else {
+        document.getElementById("starthrs").setCustomValidity("Start and end times time cannot be the same.");
+      }
+      document.getElementById("starthrs").reportValidity();
+    }
+  }
