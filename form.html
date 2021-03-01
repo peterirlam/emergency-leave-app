@@ -685,3 +685,26 @@
       return false;
     }
   }
+
+  function setHrsOffered() {
+    var endhrs = document.getElementById("endhrsOffered").options[document.getElementById("endhrsOffered").selectedIndex].value;
+    var starthrs = document.getElementById("starthrsOffered").options[document.getElementById("starthrsOffered").selectedIndex].value;
+    var endmins = document.getElementById("endminsOffered").options[document.getElementById("endminsOffered").selectedIndex].value;
+    var startmins = document.getElementById("startminsOffered").options[document.getElementById("startminsOffered").selectedIndex].value;
+    var totalMins = parseInt(endmins) - parseInt(startmins);
+    var totalHrs = parseInt(endhrs) - parseInt(starthrs);
+    if (totalHrs > 0 || (totalHrs == 0) && (totalMins > 0)) {
+      var totalMins;
+      if (endmins == startmins) {
+        document.getElementById("totalhrsoffered").value = totalHrs + ":0";
+      } else if (endmins == "0") {
+        document.getElementById("totalhrsoffered").value = (totalHrs - 1) + ":" + (60 - startmins);
+      } else {
+        document.getElementById("totalhrsoffered").value = totalHrs + ":" + (endmins - startmins);
+      }
+      return true;
+    } else {
+      document.getElementById("totalhrsoffered").value = "";
+      return false;
+    }
+  }
