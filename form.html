@@ -859,3 +859,71 @@
       document.getElementById("starthrsOffered").reportValidity();
     }
   }
+
+  function timeoffreason() {
+    const rbs = document.querySelectorAll('input[name="hoursoffreason"]');
+    let selectedValue;
+    for (const rb of rbs) {
+      if (rb.checked) {
+        selectedValue = rb.value;
+        break;
+      }
+    }
+    if (selectedValue == "unpaid") {
+      document.getElementById("timeOfferedSection").style.display = "none";
+      document.getElementById("btnsubmit").disabled = false;
+      document.getElementById("btnsubmit").style.backgroundColor = "#1c87c9";
+      document.getElementById("hoursoffreasonstatus").innerHTML = "Click 'Submit' to request time recorded as <u>unpaid leave</u>";
+      resetTimeSelectors();
+      deleteTimeAllOffered();
+    } else if (selectedValue == "annual") {
+      document.getElementById("timeOfferedSection").style.display = "none";
+      document.getElementById("btnsubmit").disabled = false;
+      document.getElementById("btnsubmit").style.backgroundColor = "#1c87c9";
+      document.getElementById("hoursoffreasonstatus").innerHTML = "Click 'Submit' to request time recorded as <u>annual leave</u>";
+      resetTimeSelectors();
+      deleteTimeAllOffered();
+    } else if (selectedValue == "makeup") {
+      document.getElementById("timeOfferedSection").style.display = "inline"
+      document.getElementById("btnsubmit").disabled = true;
+      document.getElementById("btnsubmit").style.backgroundColor = "#ccc";
+      document.getElementById("hoursoffreasonstatus").innerHTML = "Enter hours you intend to work: (must match time taken)";
+      resetTimeSelectors();
+    }
+  }
+
+  function resetTimeSelectors() {
+    document.getElementById("hoursTakenAdded").innerHTML = "";
+    document.getElementById("dateTimeTaken").value = false;
+    document.getElementById("totalhrstaken").value = "";
+    document.getElementById("starthrs").selectedIndex = "0";
+    document.getElementById("startmins").selectedIndex = "0";
+    document.getElementById("endhrs").selectedIndex = "0";
+    document.getElementById("endmins").selectedIndex = "0";
+    document.getElementById("lnkdeleteTimeTaken").style.visibility = 'visible';
+    document.getElementById("hoursOfferedAdded").innerHTML = "";
+    document.getElementById("dateTimeOffered").value = false;
+    document.getElementById("totalhrsoffered").value = "";
+    document.getElementById("starthrsOffered").selectedIndex = "0";
+    document.getElementById("startminsOffered").selectedIndex = "0";
+    document.getElementById("endhrsOffered").selectedIndex = "0";
+    document.getElementById("endminsOffered").selectedIndex = "0";
+    document.getElementById("lnkdeleteTimeOffered").style.visibility = 'visible';
+  }
+
+  function clearStatus(cntl) {
+    document.getElementById(cntl).innerHTML = "";
+  }
+
+  function checkManager() {
+    if (document.getElementById("managername").options[document.getElementById("managername").selectedIndex].value == "0") {
+      document.getElementById("managername").setCustomValidity("Manager name required");
+      document.getElementById("managername").reportValidity();
+      return false;
+    } else {
+      return true;
+    }
+  }
+</script>
+
+</html>
