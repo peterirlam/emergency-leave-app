@@ -127,3 +127,79 @@
       return CStr(s).replace(/\s\s*$/, "");
     };
   </script>
+  <div class="main-block">
+    <form id="main" action='https://script.google.com/a/calancs.org.uk/macros/s/AKfycbxdYVreAZgKUc8sbExgcA8sKwWF76UIuPs3XJ_MUkvU722xNd4/exec' method='post'>
+      <div id="content">
+        <h1>Request for Emergency Leave</h1>
+        <p>Request from: <?= requestername ?> <span style="margin-left:10px;"></span><?= requesteremail ?><span style="margin-left:30px;"></span><?= managername ?></p>
+        <br>
+        <? var timeTakenString = timeTakenList; var timetakenlistArray = timeTakenString.split("@");?>
+        <? var timeOfferedString = timeOfferedList;?>
+        <? if (timeOfferedString != "notapplicable") {  ?>
+        <p style="font-size:16px;color:#2371a0;font-weight:500;"><?= requestername ?> is requesting approval to take the following time off from work:</p>
+        <? } else { ?>
+        <p style="font-size:16px;color:#2371a0;font-weight:500;"><?= requestername ?> is requesting approval to take the following time off from work as <?=reasonForTimeTaken ?>:</p>
+        <? } ?>
+        <hr>
+        <div style="flex: width 100%">
+          <?for(i=0;i<timetakenlistArray.length;i++) { ?>
+          <p><?=Trim(timetakenlistArray[i].split("|")[0])?><span style="margin-left:20px;"></span><?=Trim(timetakenlistArray[i].split("|")[1])?><span style="margin-left:40px;"></span>(<?=Trim(timetakenlistArray[i].split("|")[2])?>)</p>
+          <? } ?>
+          <br>
+          <p><strong>Total:</strong><span style="margin-left:5px;"></span><?=runningtotalTimetaken?>
+        </div>
+        <br>
+        <br>
+        <? if (timeOfferedString != "notapplicable") { var timeofferedlistArray = timeOfferedString.split("@");?>
+        <p style="font-size:16px;color:#2371a0;font-weight:500;">Alternative time offered to make up for above:</p>
+        <hr>
+        <div style="flex: width 100%">
+          <?for(i=0;i<timeofferedlistArray.length;i++) { ?>
+          <p><?=Trim(timeofferedlistArray[i].split("|")[0])?><span style="margin-left:20px;"></span><?=Trim(timeofferedlistArray[i].split("|")[1])?><span style="margin-left:40px;"></span>(<?=Trim(timeofferedlistArray[i].split("|")[2])?>)</p>
+          <? } ?>
+          <br>
+          <p><strong>Total:</strong><span style="margin-left:5px;"></span><?=runningtotalTimeoffered?>
+        </div>
+        <? } ?>
+        <br />
+        <br />
+        <br />
+        <p style="font-size:14px;color:darkred;font-weight:400;">Please indicate your response to the above request and click "Send" to notify the member of staff.</p>
+        <hr>
+        <br>
+        <div style="display: flex;">
+          <label style="margin-top: 10px; text-align: left; width: 130px; margin-left: 5px;">Approved</label>
+          <div style="display:inline;">
+            <input id="chkApproved" name="chkApproved" value="approved" style="width:40px;" type="checkbox" onchange="checkApprovalStatus(this.id);">
+            <label style="margin-top:10px; text-align: left; width: 130px;">Not Approved</label>
+            <input id="chkRejected" name="chkRejected" value="rejected" style="width:40px;" type="checkbox" onchange="checkApprovalStatus(this.id);">
+          </div>
+          <br>
+          <br>
+          <br>
+          <div id="reasonNotApprovedSection" style="visibility:hidden;">
+            <p>Please state reason for not approving this request:</p>
+            <textarea id="reasonNotApproved" name="reasonNotApproved" rows="4" cols="50" style="resize: none; height:50px;text-align:left;padding:2px;" oninvalid="this.setCustomValidity('Please enter reason for not approving this request')"
+              oninput="this.setCustomValidity('')" required></textarea>
+          </div>
+          <button id="btnsubmit" style="background:#ccc;float:right;margin-top:-142px;" onclick="formsubmitted();" disabled>Send</button>
+          <div id="progress" style="float:right;display:none;margin-top:-50px;">
+            <div class="loader"></div>
+            <div style="float:right;display:inline;color:red;margin-top:10px;">Submitting please wait ...</div>
+          </div>
+        </div>
+        <div style="clear:both;"></div>
+      </div>
+      <input type="hidden" id="manageremail" name="manageremail" value="<?=manageremail?>">
+      <input type="hidden" id="requestername" name="requestername" value="<?=requestername?>">
+      <input type="hidden" id="requesteremail" name="requesteremail" value="<?=requesteremail?>">
+      <input type="hidden" id="timeTakenList" name="timeTakenList" value="<?=timeTakenList?>">
+      <input type="hidden" id="timeOfferedList" name="timeOfferedList" value="<?=timeOfferedList?>">
+      <input type="hidden" id="runningtotalTimetaken" name="runningtotalTimetaken" value="<?=runningtotalTimetaken?>">
+      <input type="hidden" id="runningtotalTimeoffered" name="runningtotalTimeoffered" value="<?=runningtotalTimeoffered?>">
+      <input type="hidden" id="managername" name="managername" value="<?=managername?>">
+      <input type="hidden" id="reasonForTimeTaken" name="reasonForTimeTaken" value="<?=reasonForTimeTaken?>">
+      <input type="hidden" id="hdnApprovalStatus" name="hdnApprovalStatus">
+    </form>
+  </div>
+</body>
