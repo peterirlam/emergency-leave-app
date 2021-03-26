@@ -203,3 +203,28 @@
     </form>
   </div>
 </body>
+<script>
+  function formsubmitted() {
+    document.getElementById("progress").style.display = 'inline';
+  }
+
+  function checkApprovalStatus(id) {
+    if (id == "chkApproved") {
+      document.getElementById("chkRejected").checked = false;
+      document.getElementById("hdnApprovalStatus").value = "Approved";
+      document.getElementById("reasonNotApproved").value = "N/A";
+      document.getElementById("reasonNotApprovedSection").style.visibility = "hidden";
+      document.getElementById('btnsubmit').formNoValidate = true;
+    } else {
+      document.getElementById("chkApproved").checked = false;
+      document.getElementById("hdnApprovalStatus").value = "Denied";
+      document.getElementById("reasonNotApprovedSection").style.visibility = "visible";
+      document.getElementById("reasonNotApproved").value = "";
+      document.getElementById('btnsubmit').formNoValidate = false;
+    }
+    document.getElementById("btnsubmit").disabled = false;
+    document.getElementById("btnsubmit").style.backgroundColor = "#1c87c9";
+  }
+</script>
+
+</html>
