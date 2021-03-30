@@ -53,3 +53,27 @@ function doPost(e) {
   return html.evaluate().setSandboxMode(HtmlService.SandboxMode.IFRAME)
     .setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL);
 }
+
+function isUndefined(arg) {
+  return typeof arg == 'undefined';
+}
+
+function IsMissing(x) {
+  return isUndefined(x);
+}
+
+function CStr(v) {
+  return v === null || IsMissing(v) ? ' ' : v.toString();
+}
+
+function Trim(v) {
+  return LTrim(RTrim(v));
+};
+
+function LTrim(s) {
+  return CStr(s).replace(/^\s\s*/, "");
+};
+
+function RTrim(s) {
+  return CStr(s).replace(/\s\s*$/, "");
+};
