@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Leaver form</title>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+  <style>
+    html,
+    body {
+      min-height: 100%;
+      padding: 0;
+      margin: 0;
+      font-family: Roboto, Arial, sans-serif;
+      font-size: 14px;
+      color: #666;
+    }
+
+    h2 {
+      font-weight: 400;
+      color: #FFF;
+      margin-left: -40px;
+      margin-bottom: -25px;
+      padding-top: 4px;
+    }
+
+    p {
+      margin: 0 0 5px;
+    }
+
+    .main-form {
+      display: inline-block;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: #1c87c9;
+      width: 100%;
+    }
+
+    form {
+      padding: 25px;
+      margin: auto;
+      margin-top: 2px;
+      box-shadow: 0 2px 5px #f5f5f5;
+      background: #f5f5f5;
+      width: 1100px;
+    }
+
+    .fas {
+      margin: 25px 10px 0;
+      font-size: 72px;
+      color: #fff;
+    }
+
+    .fa-envelope {
+      transform: rotate(-20deg);
+    }
+
+    .fa-at,
+    .fa-mail-bulk {
+      transform: rotate(10deg);
+    }
+
+    input,
+    textarea {
+      width: 300px;
+      padding: 8px;
+      margin-bottom: 12px;
+      border: 1px solid #1c87c9;
+      outline: none;
+      display: block;
+    }
+
+    select {
+      width: 45px;
+      height: 30px;
+      margin-bottom: 12px;
+      padding: 4px;
+      border: 1px solid #1c87c9;
+      outline: none;
+      background: #fff;
+    }
+
+    textarea {
+      width: 97%;
+      margin-bottom: 4px;
+      margin-top: 10px;
+    }
+
+    .addressfields {
+      margin-right: 100px;
+      margin-bottom: 6px;
+    }
+
+    input::placeholder {
+      color: #666;
+    }
+
+    button {
+      width: 300px;
+      padding: 10px;
+      border: none;
+      background: #1c87c9;
+      font-size: 16px;
+      font-weight: 400;
+      color: #fff;
+      margin-top: 20px;
+    }
+
+    button:hover {
+      background: #2371a0;
+    }
+
+    @media (min-width: 568px) {
+      .main-form {
+        flex-direction: row;
+      }
+
+      .dropbtn {
+        background-color: #fff;
+        color: #666;
+        padding: 4px 10px;
+        border: 1px solid #1c87c9;
+        font-family: Roboto, Arial, sans-serif;
+        font-size: 14px;
+        color: #666;
+        margin-bottom: 15px;
+      }
+
+      .center_form {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+
+    .dropdown-content a:hover {
+      background-color: #ddd;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    .dropdown:hover .dropbtn {
+      background-color: #ddd;
+    }
+
+    .alldropdowns {
+      margin-bottom: 5px;
+    }
+
+    .loader {
+      border: 8px solid #ff0000;
+      border-radius: 50%;
+      border-top: 8px solid #fff;
+      border-bottom: 8px solid #0000ff;
+      margin-left: -30px;
+      width: 8px;
+      height: 8px;
+      -webkit-animation: spin 2s linear infinite;
+      /* Safari */
+      animation: spin 2s linear infinite;
+      position: relative;
+      display: inline-block;
+    }
+
+    /* Safari */
+    @-webkit-keyframes spin {
+      0% {
+        -webkit-transform: rotate(0deg);
+      }
+
+      100% {
+        -webkit-transform: rotate(360deg);
+      }
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="center_form">
+    <div class="main-form">
+      <div style="display:flex; width:100%;">
+        <image src="https://drive.google.com/uc?export=view&id=1kMf2uvo5rmTi2YkjVWTP90d9STbF2Mwx" style="vertical-align:middle;display:inline;margin-left:10%;" width="320px" height="116px" />
+        <h2>IT Asset Management</h2>
+      </div>
+      <form onsubmit="formsubmitted()" action='https://script.google.com/a/calancs.org.uk/macros/s/AKfycbw6fdilgTjaQ8EcGB2sfgJsdJbvAuvEC0IWYin7yuygJ76jCMc/exec' method='post' id='leavers'>
+        <div class="info">
+          <div class="alldropdowns" style="display:flex;margin-bottom:10px;">
+            <label style="margin-top:5px;text-align:left;width:80px;margin-right:5px;">Device Type:</label>
+            <div class="dropdown">
+              <select id="device-type-dropdown" name="device-type-dropdown" style="width:150px;" onclick="deviceSelected();">
+                <option value="Select">Select Device</option>
+                <option value="Chromebook">Chromebook</option>
+                <option value="Laptop">Laptop</option>
+                <option value="All-In-One">All-In-One</option>
+                <option value="Desktop PC">Desktop PC</option>
+                <option value="MacBook">MacBook</option>
+                <option value="Notebook">Notebook</option>
+                <option value="Tablet">Tablet</option>
+                <option value="Mobile Phone">Mobile Phone</option>
+                <option value="Printer">Printer</option>
+                <option value="Printer/Scanner">Printer/Scanner</option>
+                <option value="Stand Alone Scanner">Stand Alone Scanner</option>
+                <option value="Monitor">Monitor</option>
+                <option value="Wildex Headset (Single)">Wildex Headset (Single)</option>
+                <option value="Wildex Headset (Duo)">Wildex Headset (Duo)</option>
+                <option value="Wireless Mouse">Wireless Mouse</option>
+              </select>
+            </div>
+            <label style="margin-top:5px;text-align:right;width:40px;margin-right:5px;margin-left:10px;">OS:</label>
+            <div class="dropdown">
+              <select id="device_os" name="device_os" style="width:150px;">
+              </select>
+            </div>
+            <label style="margin-top:5px;text-align:right;width:40px;margin-left:20px;margin-right:5px;">Make:</label>
+            <div class="dropdown">
+              <select id="make-dropdown" name="make-dropdown" style="width:150px;">
+                <option value="Select">Select Make</option>
+                <option value="HP">HP</option>
+                <option value="Lenovo">Lenovo</option>
+                <option value="Dell">Dell</option>
+                <option value="Acer">Acer</option>
+                <option value="Asus">Asus</option>
+              </select>
+            </div>
+            <label style="margin-top:5px;text-align:right;width:45px;margin-left:15px;margin-right:5px;">Model:</label>
+            <div class="dropdown">
+              <select id="model-dropdown" name="model-dropdown" style="width:150px;">
+                <option value="Select">Select Model</option>
+                <option value="HP">HP</option>
+                <option value="Lenovo">Lenovo</option>
+                <option value="Dell">Dell</option>
+                <option value="Acer">Acer</option>
+                <option value="Asus">Asus</option>
+              </select>
+            </div>
+          </div>
