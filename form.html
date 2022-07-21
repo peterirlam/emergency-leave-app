@@ -430,31 +430,31 @@
 
 <script>
   function sortList(selectlist) {
-    var sortByDate = function(a, b) {
+    let sortByDate = function(a, b) {
       return new Date(a.value) - new Date(b.value);
     }
-    var list = document.getElementById(selectlist);
-    var options = list.getElementsByTagName("option");
+    let list = document.getElementById(selectlist);
+    let options = list.getElementsByTagName("option");
     // NodeList in previous step is an
     // object and needs to be converted to an array.
-    var optionsArray = Array.prototype.slice.call(options);
+    let optionsArray = Array.prototype.slice.call(options);
     // Use the sort method (in-place sorting)
     optionsArray.sort(sortByDate);
     // re-insert the sorted nodes
-    for (var i = 0; i < optionsArray.length; i++) {
+    for (let i = 0; i < optionsArray.length; i++) {
       list.appendChild(optionsArray[i]);
     }
   }
 
   function formsubmitted() {
-    var inpName = document.getElementById("name_001");
-    var inpEmail = document.getElementById("email_001");
-    var inpCheckedWithManager = document.getElementById("checkbox_001");
+    let inpName = document.getElementById("name_001");
+    let inpEmail = document.getElementById("email_001");
+    let inpCheckedWithManager = document.getElementById("checkbox_001");
     if (inpName.checkValidity() && inpCheckedWithManager.checkValidity()) {
       if (document.getElementById("unpaidleave").checked) {
         document.getElementById("hdnTimeTakenReason").value = "Unpaid Leave";
-        var hrstakenSelect = document.getElementById("takenhours");
-        var hrstakenString = " ";
+        let hrstakenSelect = document.getElementById("takenhours");
+        let hrstakenString = " ";
         for (i = 0; i < hrstakenSelect.length; i++) {
           if (i < hrstakenSelect.length - 1) {
             hrstakenString += hrstakenSelect.options[i].text.replace("From: ", "").replace("Total: ", "") + "@";
@@ -469,8 +469,8 @@
         document.getElementById("main").submit();
       } else if (document.getElementById("annualleave").checked) {
         document.getElementById("hdnTimeTakenReason").value = "Annual Leave"
-        var hrstakenSelect = document.getElementById("takenhours");
-        var hrstakenString = " ";
+        let hrstakenSelect = document.getElementById("takenhours");
+        let hrstakenString = " ";
         for (i = 0; i < hrstakenSelect.length; i++) {
           if (i < hrstakenSelect.length - 1) {
             hrstakenString += hrstakenSelect.options[i].text.replace("From: ", "").replace("Total: ", "") + "@";
@@ -485,8 +485,8 @@
         document.getElementById("main").submit();
       } else if (document.getElementById("makingup").checked) {
         document.getElementById("hdnTimeTakenReason").value = "Worked at alternate time"
-        var hrstakenSelect = document.getElementById("takenhours");
-        var hrstakenString = " ";
+        let hrstakenSelect = document.getElementById("takenhours");
+        let hrstakenString = " ";
         for (i = 0; i < hrstakenSelect.length; i++) {
           if (i < hrstakenSelect.length - 1) {
             hrstakenString += hrstakenSelect.options[i].text.replace("From: ", "").replace("Total: ", "") + "@";
@@ -495,8 +495,8 @@
           }
         }
         document.getElementById("hdnTimeTakenList").value = hrstakenString;
-        var hrsofferedSelect = document.getElementById("offeredhours");
-        var hrsofferedString = " ";
+        let hrsofferedSelect = document.getElementById("offeredhours");
+        let hrsofferedString = " ";
         for (i = 0; i < hrsofferedSelect.length; i++) {
           if (i < hrsofferedSelect.length - 1) {
             hrsofferedString += hrsofferedSelect.options[i].text.replace("From: ", "").replace("Total: ", "") + "@";
@@ -515,14 +515,14 @@
 
   function formatDate(thedate) {
     let current_datetime = new Date(thedate)
-    var day;
-    var month;
+    let day;
+    let month;
     if (current_datetime.getDate().toString().length < 2) {
       day = "0" + current_datetime.getDate();
     } else {
       day = current_datetime.getDate();
     }
-    var currentmonth = current_datetime.getMonth() + 1;
+    let currentmonth = current_datetime.getMonth() + 1;
     if (currentmonth.toString().length < 2) {
       month = "0" + currentmonth
     } else {
@@ -537,10 +537,10 @@
   }
 
   function checkTimeTaken() {
-    var starthrs = document.getElementById("starthrs").options[document.getElementById("starthrs").selectedIndex].value;
-    var endhrs = document.getElementById("endhrs").options[document.getElementById("endhrs").selectedIndex].value;
-    var startmins = document.getElementById("startmins").options[document.getElementById("startmins").selectedIndex].value;
-    var endmins = document.getElementById("endmins").options[document.getElementById("endmins").selectedIndex].value;
+    let starthrs = document.getElementById("starthrs").options[document.getElementById("starthrs").selectedIndex].value;
+    let endhrs = document.getElementById("endhrs").options[document.getElementById("endhrs").selectedIndex].value;
+    let startmins = document.getElementById("startmins").options[document.getElementById("startmins").selectedIndex].value;
+    let endmins = document.getElementById("endmins").options[document.getElementById("endmins").selectedIndex].value;
     if (!document.getElementById("dateTimeTaken").value) {
       document.getElementById("dateTimeTaken").setCustomValidity("Date required");
       document.getElementById("dateTimeTaken").reportValidity();
@@ -560,10 +560,10 @@
   }
 
   function checkTimeOffered() {
-    var starthrs = document.getElementById("starthrsOffered").options[document.getElementById("starthrsOffered").selectedIndex].value;
-    var endhrs = document.getElementById("endhrsOffered").options[document.getElementById("endhrsOffered").selectedIndex].value;
-    var startmins = document.getElementById("startminsOffered").options[document.getElementById("startminsOffered").selectedIndex].value;
-    var endmins = document.getElementById("endminsOffered").options[document.getElementById("endminsOffered").selectedIndex].value;
+    let starthrs = document.getElementById("starthrsOffered").options[document.getElementById("starthrsOffered").selectedIndex].value;
+    let endhrs = document.getElementById("endhrsOffered").options[document.getElementById("endhrsOffered").selectedIndex].value;
+    let startmins = document.getElementById("startminsOffered").options[document.getElementById("startminsOffered").selectedIndex].value;
+    let endmins = document.getElementById("endminsOffered").options[document.getElementById("endminsOffered").selectedIndex].value;
 
     if (!document.getElementById("dateTimeOffered").value) {
       document.getElementById("dateTimeOffered").setCustomValidity("Date required");
@@ -584,22 +584,22 @@
   }
 
   function deleteTimeTaken() {
-    var sel = document.getElementById("takenhours");
-    var opt = sel.options[sel.selectedIndex];
-    var hrsTaken = opt.text.split("Total:")[1].trim().split(" ")[0];
-    var minsTaken = opt.text.split("Total:")[1].trim().split(" ")[2];
+    let sel = document.getElementById("takenhours");
+    let opt = sel.options[sel.selectedIndex];
+    let hrsTaken = opt.text.split("Total:")[1].trim().split(" ")[0];
+    let minsTaken = opt.text.split("Total:")[1].trim().split(" ")[2];
     if (typeof minsTaken == "undefined") {
       minsTaken = "0";
     } else {
       minsTaken = opt.text.split("Total:")[1].trim().split(" ")[2];
     }
-    var totalminstaken = parseInt(minsTaken) + (parseInt(hrsTaken) * 60)
-    var runningtotalhrstaken = document.getElementById("runningtotalTimetaken").value.split(":")[0];
-    var runningtotalminstaken = document.getElementById("runningtotalTimetaken").value.split(":")[1];
+    let totalminstaken = parseInt(minsTaken) + (parseInt(hrsTaken) * 60)
+    let runningtotalhrstaken = document.getElementById("runningtotalTimetaken").value.split(":")[0];
+    let runningtotalminstaken = document.getElementById("runningtotalTimetaken").value.split(":")[1];
     if (runningtotalminstaken == "00") {
       runningtotalminstaken = "0";
     }
-    var totalrunningtotalminstaken = (parseInt(runningtotalminstaken) + (parseInt(runningtotalhrstaken) * 60));
+    let totalrunningtotalminstaken = (parseInt(runningtotalminstaken) + (parseInt(runningtotalhrstaken) * 60));
     runningtotalhrstaken = Math.trunc(parseInt(parseInt(totalrunningtotalminstaken) - parseInt(totalminstaken)) / 60);
     runningtotalminstaken = parseInt(parseInt(totalrunningtotalminstaken) - parseInt(totalminstaken)) % 60;
     document.getElementById("runningtotalTimetaken").value = runningtotalhrstaken + ":" + runningtotalminstaken;
@@ -621,22 +621,22 @@
   }
 
   function deleteTimeOffered() {
-    var sel = document.getElementById("offeredhours");
-    var opt = sel.options[sel.selectedIndex];
-    var hrsOffered = opt.text.split("Total:")[1].trim().split(" ")[0];
-    var minsOffered = opt.text.split("Total:")[1].trim().split(" ")[2];
+    let sel = document.getElementById("offeredhours");
+    let opt = sel.options[sel.selectedIndex];
+    let hrsOffered = opt.text.split("Total:")[1].trim().split(" ")[0];
+    let minsOffered = opt.text.split("Total:")[1].trim().split(" ")[2];
     if (typeof minsOffered == "undefined") {
       minsOffered = "0";
     } else {
       minsOffered = opt.text.split("Total:")[1].trim().split(" ")[2];
     }
-    var totalminsoffered = parseInt(minsOffered) + (parseInt(hrsOffered) * 60)
-    var runningtotalhrsoffered = document.getElementById("runningtotalTimeoffered").value.split(":")[0];
-    var runningtotalminsoffered = document.getElementById("runningtotalTimeoffered").value.split(":")[1];
+    let totalminsoffered = parseInt(minsOffered) + (parseInt(hrsOffered) * 60)
+    let runningtotalhrsoffered = document.getElementById("runningtotalTimeoffered").value.split(":")[0];
+    let runningtotalminsoffered = document.getElementById("runningtotalTimeoffered").value.split(":")[1];
     if (runningtotalminsoffered == "00") {
       runningtotalminsoffered = "0";
     }
-    var totalrunningtotalminsoffered = (parseInt(runningtotalminsoffered) + (parseInt(runningtotalhrsoffered) * 60));
+    let totalrunningtotalminsoffered = (parseInt(runningtotalminsoffered) + (parseInt(runningtotalhrsoffered) * 60));
     runningtotalhrsoffered = Math.trunc(parseInt(parseInt(totalrunningtotalminsoffered) - parseInt(totalminsoffered)) / 60);
     runningtotalminsoffered = parseInt(parseInt(totalrunningtotalminsoffered) - parseInt(totalminsoffered)) % 60;
     document.getElementById("runningtotalTimeoffered").value = runningtotalhrsoffered + ":" + runningtotalminsoffered;
@@ -651,7 +651,7 @@
   }
 
   function deleteTimeAllOffered() {
-    var sel = document.getElementById("offeredhours");
+    let sel = document.getElementById("offeredhours");
     while (sel.length > 0) {
       sel.remove(0);
     }
@@ -664,14 +664,14 @@
   }
 
   function setHrsTaken() {
-    var endhrs = document.getElementById("endhrs").options[document.getElementById("endhrs").selectedIndex].value;
-    var starthrs = document.getElementById("starthrs").options[document.getElementById("starthrs").selectedIndex].value;
-    var endmins = document.getElementById("endmins").options[document.getElementById("endmins").selectedIndex].value;
-    var startmins = document.getElementById("startmins").options[document.getElementById("startmins").selectedIndex].value;
-    var totalMins = parseInt(endmins) - parseInt(startmins);
-    var totalHrs = parseInt(endhrs) - parseInt(starthrs);
+    let endhrs = document.getElementById("endhrs").options[document.getElementById("endhrs").selectedIndex].value;
+    let starthrs = document.getElementById("starthrs").options[document.getElementById("starthrs").selectedIndex].value;
+    let endmins = document.getElementById("endmins").options[document.getElementById("endmins").selectedIndex].value;
+    let startmins = document.getElementById("startmins").options[document.getElementById("startmins").selectedIndex].value;
+    let totalMins = parseInt(endmins) - parseInt(startmins);
+    let totalHrs = parseInt(endhrs) - parseInt(starthrs);
     if (totalHrs > 0 || (totalHrs == 0) && (totalMins > 0)) {
-      var totalMins;
+      let totalMins;
       if (endmins == startmins) {
         document.getElementById("totalhrstaken").value = totalHrs + ":0";
       } else if (endmins == "0") {
@@ -687,14 +687,14 @@
   }
 
   function setHrsOffered() {
-    var endhrs = document.getElementById("endhrsOffered").options[document.getElementById("endhrsOffered").selectedIndex].value;
-    var starthrs = document.getElementById("starthrsOffered").options[document.getElementById("starthrsOffered").selectedIndex].value;
-    var endmins = document.getElementById("endminsOffered").options[document.getElementById("endminsOffered").selectedIndex].value;
-    var startmins = document.getElementById("startminsOffered").options[document.getElementById("startminsOffered").selectedIndex].value;
-    var totalMins = parseInt(endmins) - parseInt(startmins);
-    var totalHrs = parseInt(endhrs) - parseInt(starthrs);
+    let endhrs = document.getElementById("endhrsOffered").options[document.getElementById("endhrsOffered").selectedIndex].value;
+    let starthrs = document.getElementById("starthrsOffered").options[document.getElementById("starthrsOffered").selectedIndex].value;
+    let endmins = document.getElementById("endminsOffered").options[document.getElementById("endminsOffered").selectedIndex].value;
+    let startmins = document.getElementById("startminsOffered").options[document.getElementById("startminsOffered").selectedIndex].value;
+    let totalMins = parseInt(endmins) - parseInt(startmins);
+    let totalHrs = parseInt(endhrs) - parseInt(starthrs);
     if (totalHrs > 0 || (totalHrs == 0) && (totalMins > 0)) {
-      var totalMins;
+      let totalMins;
       if (endmins == startmins) {
         document.getElementById("totalhrsoffered").value = totalHrs + ":0";
       } else if (endmins == "0") {
@@ -710,20 +710,20 @@
   }
 
   function addTimeTaken() {
-    var hrstakenSelect = document.getElementById("takenhours");
-    var startmins = document.getElementById("startmins").value;
-    var endmins = document.getElementById("endmins").value;
+    let hrstakenSelect = document.getElementById("takenhours");
+    let startmins = document.getElementById("startmins").value;
+    let endmins = document.getElementById("endmins").value;
     if (document.getElementById("startmins").value == "0") {
       startmins = "00"
     }
     if (document.getElementById("endmins").value == "0") {
       endmins = "00"
     }
-    var starttime = document.getElementById("starthrs").value + ":" + startmins;
-    var endtime = document.getElementById("endhrs").value + ":" + endmins;
-    var totalTimeTaken;
-    var totalmins;
-    var totalTimeArray = document.getElementById("totalhrstaken").value.split(":");
+    let starttime = document.getElementById("starthrs").value + ":" + startmins;
+    let endtime = document.getElementById("endhrs").value + ":" + endmins;
+    let totalTimeTaken;
+    let totalmins;
+    let totalTimeArray = document.getElementById("totalhrstaken").value.split(":");
     totalhours = totalTimeArray[0];
     if (totalTimeArray[1] == "0") {
       totalTimeTaken = totalTimeArray[0] + " hrs";
@@ -732,9 +732,9 @@
     }
     if (setHrsTaken()) {
       if (document.getElementById("hdntotalTimeTaken").value.length > 0) {
-        var currentTotalTimeTaken = document.getElementById("hdntotalTimeTaken").value.split(":");
-        var totalHours = parseInt(totalTimeArray[0]) + parseInt(currentTotalTimeTaken[0]);
-        var totalMins = parseInt(totalTimeArray[1]) + parseInt(currentTotalTimeTaken[1]);
+        let currentTotalTimeTaken = document.getElementById("hdntotalTimeTaken").value.split(":");
+        let totalHours = parseInt(totalTimeArray[0]) + parseInt(currentTotalTimeTaken[0]);
+        let totalMins = parseInt(totalTimeArray[1]) + parseInt(currentTotalTimeTaken[1]);
         if (totalMins >= 60) {
           totalHours = totalHours + parseInt(totalMins / 60);
           totalMins = totalMins % 60;
@@ -745,8 +745,8 @@
         document.getElementById("hdntotalTimeTaken").value = document.getElementById("totalhrstaken").value;
         document.getElementById("runningtotalTimetaken").value = document.getElementById("totalhrstaken").value;
       }
-      var dateObjFormatted = document.getElementById("dateTimeTaken").value;
-      var option;
+      let dateObjFormatted = document.getElementById("dateTimeTaken").value;
+      let option;
       option = formatDate("Time taken: " + document.getElementById("dateTimeTaken").value) + " \u00A0 |  \u00A0  From: " + starttime + " to: " + endtime + " \u00A0  |  \u00A0  Total: " + totalTimeTaken;
       hrstakenSelect.options.add(new Option(option, dateObjFormatted), hrstakenSelect.options[0]);
       hrstakenSelect.selectedIndex = 0;
@@ -759,8 +759,8 @@
       document.getElementById("endmins").selectedIndex = "0";
       document.getElementById("lnkdeleteTimeTaken").style.visibility = 'visible';
       document.getElementById("timereason").style.display = 'inline';
-      var totaltaken = document.getElementById("runningtotalTimetaken").value;
-      var totaloffered = document.getElementById("runningtotalTimeoffered").value;
+      let totaltaken = document.getElementById("runningtotalTimetaken").value;
+      let totaloffered = document.getElementById("runningtotalTimeoffered").value;
       if (document.getElementById("makingup").checked) {
         if (totaltaken != totaloffered) {
           document.getElementById("btnsubmit").disabled = true;
@@ -776,7 +776,7 @@
     } else {
       endmins = document.getElementById("endmins").options[document.getElementById("endmins").selectedIndex].value;
       startmins = document.getElementById("startmins").options[document.getElementById("startmins").selectedIndex].value;
-      var totalMins = parseInt(endmins) - parseInt(startmins);
+      let totalMins = parseInt(endmins) - parseInt(startmins);
       if (totalMins < 0) {
         document.getElementById("starthrs").setCustomValidity("Start time time cannot be greater than end time.");
       } else {
@@ -787,20 +787,20 @@
   }
 
   function addTimeOffered() {
-    var hrsofferedSelect = document.getElementById("offeredhours");
-    var startmins = document.getElementById("startminsOffered").value;
-    var endmins = document.getElementById("endminsOffered").value;
+    let hrsofferedSelect = document.getElementById("offeredhours");
+    let startmins = document.getElementById("startminsOffered").value;
+    let endmins = document.getElementById("endminsOffered").value;
     if (document.getElementById("startminsOffered").value == "0") {
       startmins = "00"
     }
     if (document.getElementById("endminsOffered").value == "0") {
       endmins = "00"
     }
-    var starttime = document.getElementById("starthrsOffered").value + ":" + startmins;
-    var endtime = document.getElementById("endhrsOffered").value + ":" + endmins;
-    var totalTimeOffered;
-    var totalmins;
-    var totalTimeArray = document.getElementById("totalhrsoffered").value.split(":");
+    let starttime = document.getElementById("starthrsOffered").value + ":" + startmins;
+    let endtime = document.getElementById("endhrsOffered").value + ":" + endmins;
+    let totalTimeOffered;
+    let totalmins;
+    let totalTimeArray = document.getElementById("totalhrsoffered").value.split(":");
     totalhours = totalTimeArray[0];
     if (totalTimeArray[1] == "0") {
       totalTimeOffered = totalTimeArray[0] + " hrs";
@@ -809,9 +809,9 @@
     }
     if (setHrsOffered()) {
       if (document.getElementById("hdntotalTimeOffered").value.length > 0) {
-        var currentTotalTimeOffered = document.getElementById("hdntotalTimeOffered").value.split(":");
-        var totalHours = parseInt(totalTimeArray[0]) + parseInt(currentTotalTimeOffered[0]);
-        var totalMins = parseInt(totalTimeArray[1]) + parseInt(currentTotalTimeOffered[1]);
+        let currentTotalTimeOffered = document.getElementById("hdntotalTimeOffered").value.split(":");
+        let totalHours = parseInt(totalTimeArray[0]) + parseInt(currentTotalTimeOffered[0]);
+        let totalMins = parseInt(totalTimeArray[1]) + parseInt(currentTotalTimeOffered[1]);
         if (totalMins >= 60) {
           totalHours = totalHours + parseInt(totalMins / 60);
           totalMins = totalMins % 60;
@@ -822,8 +822,8 @@
         document.getElementById("hdntotalTimeOffered").value = document.getElementById("totalhrsoffered").value;
         document.getElementById("runningtotalTimeoffered").value = document.getElementById("totalhrsoffered").value;
       }
-      var dateObjFormatted = document.getElementById("dateTimeOffered").value;
-      var option;
+      let dateObjFormatted = document.getElementById("dateTimeOffered").value;
+      let option;
       option = formatDate("Time offered: " + document.getElementById("dateTimeOffered").value) + " \u00A0 |  \u00A0  From: " + starttime + " to: " + endtime + " \u00A0  |  \u00A0  Total: " + totalTimeOffered;
       hrsofferedSelect.options.add(new Option(option, dateObjFormatted), hrsofferedSelect.options[0]);
       hrsofferedSelect.selectedIndex = 0;
@@ -835,8 +835,8 @@
       document.getElementById("endhrsOffered").selectedIndex = "0";
       document.getElementById("endminsOffered").selectedIndex = "0";
       document.getElementById("lnkdeleteTimeOffered").style.visibility = 'visible';
-      var totaltaken = document.getElementById("runningtotalTimetaken").value;
-      var totaloffered = document.getElementById("runningtotalTimeoffered").value;
+      let totaltaken = document.getElementById("runningtotalTimetaken").value;
+      let totaloffered = document.getElementById("runningtotalTimeoffered").value;
       if (totaltaken != totaloffered) {
         document.getElementById("btnsubmit").disabled = true;
         document.getElementById("btnsubmit").style.backgroundColor = "#ccc";
@@ -850,7 +850,7 @@
     } else {
       endmins = document.getElementById("endminsOffered").options[document.getElementById("endminsOffered").selectedIndex].value;
       startmins = document.getElementById("startminsOffered").options[document.getElementById("startminsOffered").selectedIndex].value;
-      var totalMins = parseInt(endmins) - parseInt(startmins);
+      let totalMins = parseInt(endmins) - parseInt(startmins);
       if (totalMins < 0) {
         document.getElementById("starthrsOffered").setCustomValidity("Start time time cannot be greater than end time.");
       } else {
